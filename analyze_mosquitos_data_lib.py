@@ -1,5 +1,6 @@
 import pandas as pd
 import statsmodels.api as sm
+
 import matplotlib.pyplot as plt
 
 def fahr_to_celsius(tempF):
@@ -7,11 +8,12 @@ def fahr_to_celsius(tempF):
     tempC = (tempF - 32) * 5 / 9.0
     return tempC
 
-def analyze(data):
+def analyze(data, figure_filename):
     """Perform regression analysis on mosquito data
     
     Takes a dataframe as input that includes columns named 'temperature',
     'rainfall', and 'mosquitos'.
+    Figure_filename is the name of the output plot
         
     For consistency, always use temperature in Celsius.
     
@@ -27,4 +29,5 @@ def analyze(data):
     plt.plot(predicted, data['mosquitos'], 'ro')
     min_mosquitos, max_mosquitos = min(data['mosquitos']), max(data['mosquitos'])
     plt.plot([min_mosquitos, max_mosquitos], [min_mosquitos, max_mosquitos], 'k-')
+    plt.savefig(figure_filename)
     return parameters
